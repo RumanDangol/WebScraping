@@ -34,18 +34,22 @@ public class Grabber {
         reader.close();
         return content.toString();
     }
-        public String get(String link,String param) throws IOException{
+        public String post(String link,String param) throws IOException{
             URL url = new URL(link);
-            URLConnection conn =url.openConnection();
+            HttpURLConnection conn =(HttpURLConnection)url.openConnection();
             //http is used for posting
             conn.setDoOutput(true);//for posting to search
             OutputStream os = conn.getOutputStream();//for writing
+        
             os.write(param.getBytes());//post the param
+       
+            
             
         BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
         String line = "";
         StringBuilder content = new StringBuilder();
+            
 
         while ((line = reader.readLine()) != null) {
 
